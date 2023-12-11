@@ -1,7 +1,4 @@
-"""
-Created on 2018/10/9 by Chun-hui Yin(yinchunhui.ahu@gmail.com).
-Description: Script file for running our experiments on response-time QoS data.
-"""
+
 import multiprocessing
 import os
 import sys
@@ -29,7 +26,7 @@ def main():
     parser.add_argument('--density', default=list(np.arange(0.05, 0.31, 0.05)), type=list, help='Density of matrix.')
     parser.add_argument('--epochNum', default=50, type=int, help='Numbers of epochs per run.')
     parser.add_argument('--batchSize', default=256, type=int, help='Size of a batch.')
-    parser.add_argument('--layers', default=[64, 32, 16, 8, 1], type=list, help='Layers of MLP.')
+    parser.add_argument('--layers', default=[64, 32, 32, 64, 1], type=list, help='Layers of MLP.')
     parser.add_argument('--regLayers', default=[0, 0, 0, 0, 0], type=list, help='Regularizers.')
     parser.add_argument('--optimizer', default=Adam, type=str, help='The optimizer:Adam|Adamax|Nadam|Adagrad.')
     parser.add_argument('--lr', default=0.0001, type=float, help='Learning rate of the model.')
