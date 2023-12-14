@@ -146,7 +146,7 @@ class LDCF:
 
         item_id_latent = Flatten()(item_id_embedding(item_id_input))
         item_lc_latent = Flatten()(item_lc_embedding(item_lc_input))
-
+        me_vector = Attention()([item_lc_latent, user_lc_latent])
         # concatenate
         predict_user_vector = concatenate([user_id_latent, user_lc_latent])
         predict_item_vector = concatenate([item_id_latent, item_lc_latent])
@@ -165,7 +165,7 @@ class LDCF:
                           kernel_regularizer=l2(reg_layers[index]), activation='relu', name='mlpLayer%d' % index)
             mlp_vector = layer(mlp_vector)
 
-        predict_vector = concatenate([mlp_vector, cosine_vector])
+        predict_vector = concatenate([mlp_vector, me_vector, cosine_vector])
 
         # Output layer
         prediction = Dense(units=layers[-1], activation='linear', kernel_initializer=initializers.lecun_normal(),
