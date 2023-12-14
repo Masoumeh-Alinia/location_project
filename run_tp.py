@@ -13,7 +13,7 @@ import numpy as np
 from keras import initializers
 from keras.regularizers import l2
 from keras.models import Model
-from keras.layers import Embedding, Input, Dense, Flatten, concatenate, dot, Lambda
+from keras.layers import Attention, Embedding, Input, Dense, Flatten, concatenate, dot, Lambda
 from keras.optimizers import Adam, Adamax
 from keras import backend as K
 from keras.callbacks import TensorBoard
