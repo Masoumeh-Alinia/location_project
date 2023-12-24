@@ -24,7 +24,7 @@ def main():
     parser.add_argument('--dataType', default='rt', type=str, help='Type of data:rt|tp.')
     parser.add_argument('--parallel', default=True, type=bool, help='Whether to use multi-process.')
     parser.add_argument('--density', default=list(np.arange(0.05, 0.31, 0.05)), type=list, help='Density of matrix.')
-    parser.add_argument('--epochNum', default=50, type=int, help='Numbers of epochs per run.')
+    parser.add_argument('--epochNum', default=25, type=int, help='Numbers of epochs per run.')
     parser.add_argument('--batchSize', default=256, type=int, help='Size of a batch.')
     parser.add_argument('--layers', default=[512, 256, 128, 64, 1], type=list, help='Layers of MLP.')
     parser.add_argument('--regLayers', default=[0, 0, 0, 0, 0], type=list, help='Regularizers.')
