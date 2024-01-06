@@ -147,7 +147,9 @@ class LDCF:
         # concatenate
         predict_user_vector = concatenate([user_id_latent, user_lc_latent])
         predict_item_vector = concatenate([item_id_latent, item_lc_latent])
-        me_vector = Attention()([item_lc_latent, user_lc_latent])
+        attention_input = concatenate([item_lc_latent, user_lc_latent])
+        #me_vector = Attention()([item_lc_latent, user_lc_latent])
+        attention_output =  Attention(use_scale = True)([attention_input, attention_input])
         mlp_vector = concatenate([predict_user_vector, predict_item_vector])
         #mlp_vector = ([mlp_vector, attention_vector])
         # AC-COS
@@ -162,7 +164,7 @@ class LDCF:
                           kernel_regularizer=l2(reg_layers[index]), activation='relu', name='mlpLayer%d' % index)
             mlp_vector = layer(mlp_vector)
 
-        predict_vector = concatenate([mlp_vector, me_vector, cosine_vector])
+        predict_vector = concatenate([mlp_vector, attention_output, cosine_vector])
 
         # Output layer
         prediction = Dense(units=layers[-1], activation='linear', kernel_initializer=initializers.lecun_normal(),
