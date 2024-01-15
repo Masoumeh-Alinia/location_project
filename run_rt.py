@@ -152,13 +152,14 @@ class LDCF:
         attention_output =  Attention(use_scale = True)([attention_input, attention_input])
         #attention2_output =  Attention(use_scale = True)([user_lc_latent, user_lc_latent])
         #attention1_input = concatenate([item_lc_latent, attention1_output])
-        my_input = concatenate([attention_input, attention_output])
+        
         
         mlp_vector = concatenate([predict_user_vector, predict_item_vector])
         
         #mlp_vector = ([mlp_vector, attention_vector])
         # AC-COS
         cosine_vector = dot([user_lc_latent, item_lc_latent], axes=1, normalize=True)
+        my_input = concatenate([cosine_vector, attention_output])
 
         # AC_EUC euclidean_vector = Lambda(self.euclidean_distance, output_shape=self.eucl_dist_output_shape)([
         # user_lc_latent, item_lc_latent])
@@ -169,7 +170,7 @@ class LDCF:
                           kernel_regularizer=l2(reg_layers[index]), activation='relu', name='mlpLayer%d' % index)
             mlp_vector = layer(mlp_vector)
 
-        predict_vector = concatenate([mlp_vector, cosine_vector, my_input])
+        predict_vector = concatenate([mlp_vector, my_input])
 
         # Output layer
         prediction = Dense(units=layers[-1], activation='linear', kernel_initializer=initializers.lecun_normal(),
