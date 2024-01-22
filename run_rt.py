@@ -10,6 +10,7 @@ import numpy as np
 from keras import initializers
 from keras.regularizers import l2
 from keras.models import Model
+from keras.layers import Conv1D, MaxPooling1D, GlobalMaxPooling1D
 from keras.layers import Attention, Embedding, Input, Dense, Flatten, concatenate, dot, Lambda
 from keras.optimizers import Adam, Adamax
 from keras import backend as K
